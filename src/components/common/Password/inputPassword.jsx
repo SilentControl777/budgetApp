@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './inputPassword.module.css';
 import { Eye, EyeSlash } from 'iconsax-react';
 
-const inputPassword = ({ labelFor, labelName, variant = 'primary', inputId, inputName, placeholder }) => {
+const inputPassword = ({ labelFor, labelName, variant = 'primary', inputId, inputName, placeholder, value, onChange }) => {
 
     const inputPasswordClass = `${styles.inputPassword} ${styles[variant]}`;
     const showHidePwdClass = `${styles.showHidePwd}`;
@@ -17,7 +17,7 @@ const inputPassword = ({ labelFor, labelName, variant = 'primary', inputId, inpu
     return (
         <div className={inputPasswordClass}>
             <label htmlFor={labelFor}>{labelName}</label>
-            <input type={isPasswordVisible ? 'text' : 'password'} id={inputId} name={inputName} placeholder={placeholder} />
+            <input type={isPasswordVisible ? 'text' : 'password'} id={inputId} name={inputName} placeholder={placeholder} value={value} onChange={onChange} />
             <div onClick={togglePassword} className={showHidePwdClass}>
                 {isPasswordVisible ? (
                     <EyeSlash size="24" className="text-textColor dark:text-darkTextColor" title="Hide Password" />
@@ -36,6 +36,8 @@ inputPassword.propTypes = {
     inputId: PropTypes.node,
     inputName: PropTypes.node,
     placeholder: PropTypes.node,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
 };
 
 export default inputPassword;
